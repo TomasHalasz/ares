@@ -2,8 +2,8 @@
 
 namespace h4kuna\Ares;
 
-use Salamium\Testinium,
-	Tester\Assert;
+use Salamium\Testinium;
+use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -59,7 +59,7 @@ class AresTest extends \Tester\TestCase
 				throw new \RuntimeException('Bad annotation property-read od Data class: ' . $value);
 			}
 			Assert::true(isset($data[$find['name']]));
-			$names[$find['name']] = true;
+			$names[$find['name']] = TRUE;
 		}
 
 		Assert::same([], array_diff_key($data->getData(), $names));
@@ -67,14 +67,15 @@ class AresTest extends \Tester\TestCase
 		Assert::type('array', $data->toArray());
 		Assert::same([
 			'c' => 'Milan Matějček',
-			'company' => true,
-			'city' => 'Mladá Boleslav'
-		], $data->toArray(['company' => 'c', 'is_person' => 'company', 'city' => null]));
+			'company' => TRUE,
+			'city' => 'Mladá Boleslav',
+		],
+			$data->toArray(['company' => 'c', 'is_person' => 'company', 'city' => NULL]));
 	}
 
 
 	/**
-	 * @throws h4kuna\Ares\IdentificationNumberNotFoundException
+	 * @throws \h4kuna\Ares\IdentificationNumberNotFoundException
 	 */
 	public function testNoIn()
 	{

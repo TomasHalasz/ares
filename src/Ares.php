@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace h4kuna\Ares;
 
@@ -19,9 +19,9 @@ class Ares
 	private $activeMode;
 
 
-	public function __construct(DataProvider $dataProvider = null)
+	public function __construct(DataProvider $dataProvider = NULL)
 	{
-		if ($dataProvider === null) {
+		if ($dataProvider === NULL) {
 			$dataProvider = $this->createDataProvider();
 		}
 		$this->dataProvider = $dataProvider;
@@ -30,16 +30,16 @@ class Ares
 
 	/**
 	 * Load fresh data.
-	 * @param int|string $in
+	 * @param string $in
 	 * @return Data
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	public function loadData($in)
+	public function loadData(string $in): Data
 	{
 		try {
-			$this->loadXML((string) $in, true);
+			$this->loadXML($in, TRUE);
 		} catch (IdentificationNumberNotFoundException $e) {
-			$this->loadXML((string) $in, false);
+			$this->loadXML($in, FALSE);
 		}
 		return $this->getData();
 	}
@@ -47,9 +47,8 @@ class Ares
 
 	/**
 	 * Get temporary data.
-	 * @return Data
 	 */
-	public function getData()
+	public function getData(): Data
 	{
 		return $this->dataProvider->getData();
 	}
@@ -61,10 +60,10 @@ class Ares
 	 * @param bool $activeOnly
 	 * @throws IdentificationNumberNotFoundException
 	 */
-	private function loadXML($in, $activeOnly)
+	private function loadXML(string $in, bool $activeOnly)
 	{
 		$client = new GuzzleHttp\Client();
-		$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody();
+		$xmlSource = $client->request('GET', $this->createUrl($in, $activeOnly))->getBody()->getContents();
 		$xml = @simplexml_load_string($xmlSource);
 		if (!$xml) {
 			throw new IdentificationNumberNotFoundException($in);
@@ -81,7 +80,7 @@ class Ares
 	}
 
 
-	protected function processXml($xml, DataProvider $dataProvider)
+	protected function processXml(\SimpleXMLElement $xml, DataProvider $dataProvider): void
 	{
 		$dataProvider->setIN($xml->ICO)
 			->setTIN($xml->DIC)
@@ -110,32 +109,32 @@ class Ares
 	}
 
 
-	protected function isActiveMode()
+	protected function isActiveMode(): bool
 	{
-		return $this->activeMode === true;
+		return $this->activeMode === TRUE;
 	}
 
 
-	private function createUrl($inn, $activeOnly)
+	private function createUrl(string $inn, bool $activeOnly): string
 	{
-		$this->activeMode = (bool) $activeOnly;
+		$this->activeMode = $activeOnly;
 		$parameters = [
 			'ico' => $inn,
-			'aktivni' => $activeOnly ? 'true' : 'false'
+			'aktivni' => $activeOnly ? 'true' : 'false',
 		];
 		return self::URL . '?' . http_build_query($parameters);
 	}
 
 
-	private function createDataProvider()
+	private function createDataProvider(): DataProvider
 	{
 		return new DataProvider(new DataFactory());
 	}
 
 
-	private static function exists($element, $property)
+	private static function exists(\SimpleXMLElement $element, string $property): ?\SimpleXMLElement
 	{
-		return isset($element->{$property}) ? $element->{$property} : '';
+		return isset($element->{$property}) ? $element->{$property} : NULL;
 	}
 
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace h4kuna\Ares;
 
@@ -26,12 +26,7 @@ use h4kuna\DataType\Immutable;
 class Data extends Immutable\Messenger
 {
 
-	/**
-	 * Copy data
-	 * @param array $map
-	 * @return array
-	 */
-	public function toArray(array $map = [])
+	public function toArray(array $map = []): array
 	{
 		if ($map === []) {
 			return $this->getData();

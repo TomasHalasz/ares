@@ -12,6 +12,7 @@
     }
   ],
   "require": {
+    "php": ">=7.1",
     "guzzlehttp/guzzle": "^6.1",
     "h4kuna/data-type": "^2.1.1"
   },

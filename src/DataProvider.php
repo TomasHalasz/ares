@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace h4kuna\Ares;
 
-use DateTime,
-	DateTimeZone;
+use DateTime;
+use DateTimeZone;
 
 /**
  * @author Milan Matějček
@@ -24,8 +24,7 @@ class DataProvider
 	}
 
 
-	/** @return Data */
-	public function getData()
+	public function getData(): Data
 	{
 		if (is_array($this->data)) {
 			$this->setFileNumberAndCourt();
@@ -42,69 +41,66 @@ class DataProvider
 	}
 
 
-	/**
-	 * @param string|bool $active
-	 * @return self
-	 */
 	public function setActive($active)
 	{
+		dump($active);
 		$this->data['active'] = is_bool($active) ? $active : (((string) $active) == 'Aktivní'); // ==
 		return $this;
 	}
 
 
-	public function setCity($city)
+	public function setCity(string $city)
 	{
 		$this->data['city'] = self::toNull($city);
 		return $this;
 	}
 
 
-	public function setCompany($company)
+	public function setCompany(string $company)
 	{
 		$this->data['company'] = self::toNull($company);
 		return $this;
 	}
 
 
-	public function setCourt($court)
+	public function setCourt(string $court)
 	{
 		$this->data['court'] = self::toNull($court);
 		return $this;
 	}
 
 
-	public function setCreated($date)
+	public function setCreated(string $date)
 	{
 		$this->data['created'] = new DateTime((string) $date, new DateTimeZone('Europe/Prague'));
 		return $this;
 	}
 
 
-	public function setFileNumber($fileNumber)
+	public function setFileNumber(string $fileNumber)
 	{
 		$this->data['file_number'] = self::toNull($fileNumber);
 		return $this;
 	}
 
 
-	public function setIN($in)
+	public function setIN(string $in)
 	{
 		$this->data['in'] = self::toNull($in);
 		return $this;
 	}
 
 
-	public function setIsPerson($s)
+	public function setIsPerson(string $s)
 	{
-		$this->data['is_person'] = ((string) $s) <= '108';
+		$this->data['is_person'] = $s <= '108';
 		return $this;
 	}
 
 
 	private function setFileNumberAndCourt()
 	{
-		$this->data['court_all'] = null;
+		$this->data['court_all'] = NULL;
 		if ($this->data['file_number'] && $this->data['court']) {
 			$this->data['court_all'] = $this->data['file_number'] . ', ' . $this->data['court'];
 		}
@@ -155,11 +151,11 @@ class DataProvider
 	}
 
 
-	private static function toNull($v)
+	private static function toNull(string $v): ?string
 	{
-		$string = trim((string) $v);
+		$string = trim($v);
 		if ($string === '') {
-			return null;
+			return NULL;
 		}
 		return $string;
 	}

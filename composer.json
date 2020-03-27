@@ -1,13 +1,13 @@
 {
-  "name": "h4kuna/ares",
+  "name": "halasz/ares",
   "type": "library",
   "description": "Provides information about subjects by their identification number from the ARES database (in Czech Republic).",
-  "homepage": "https://github.com/h4kuna/ares",
+  "homepage": "https://github.com/halasz/ares",
   "license": "MIT",
   "authors": [
     {
-      "name": "Milan Matějček",
-      "email": "milan.matejcek@gmail.com",
+      "name": "Tomáš Halász",
+      "email": "tomas.halasz@2hcs.cz",
       "role": "Developer"
     }
   ],

@@ -1,11 +1,12 @@
 <?php
 
-namespace h4kuna\Ares;
+namespace halasz\Ares;
 
 use GuzzleHttp;
 
 /**
  * @author Milan Matějček <milan.matejcek@gmail.com>
+ * @author Milan Matějček <tomas.halasz@2hcs.cz>
  */
 class Ares
 {

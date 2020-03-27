@@ -1,6 +1,6 @@
 <?php
 
-namespace h4kuna\Ares;
+namespace halasz\Ares;
 
 interface IDataFactory
 {

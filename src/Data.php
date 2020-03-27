@@ -1,8 +1,8 @@
 <?php
 
-namespace h4kuna\Ares;
+namespace halasz\Ares;
 
-use h4kuna\DataType\Immutable;
+use halasz\DataType\Immutable;
 
 /**
  * @author Milan Matějček

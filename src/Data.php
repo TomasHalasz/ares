@@ -2,7 +2,7 @@
 
 namespace halasz\Ares;
 
-use halasz\DataType\Immutable;
+use h4kuna\DataType\Immutable;
 
 /**
  * @author Milan Matějček

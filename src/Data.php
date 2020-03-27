@@ -5,6 +5,7 @@ namespace halasz\Ares;
 use halasz\DataType\Immutable;
 
 /**
+ * @author Tomáš Halász
  * @author Milan Matějček
  * @property-read bool $active
  * @property-read string $city

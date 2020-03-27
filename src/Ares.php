@@ -5,8 +5,8 @@ namespace halasz\Ares;
 use GuzzleHttp;
 
 /**
+ * @author Tomáš Halász <tomas.halasz@2hcs.cz>
  * @author Milan Matějček <milan.matejcek@gmail.com>
- * @author Milan Matějček <tomas.halasz@2hcs.cz>
  */
 class Ares
 {

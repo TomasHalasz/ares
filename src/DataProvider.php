@@ -6,6 +6,7 @@ use DateTime,
 	DateTimeZone;
 
 /**
+ * @author Tomáš Halász
  * @author Milan Matějček
  */
 class DataProvider
